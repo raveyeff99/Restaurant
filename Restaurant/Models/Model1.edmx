@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="NOMBRE1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE2" Type="varchar" MaxLength="50" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="int" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CATEGORIA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRECIO" Type="money" />
+        </EntityType>
+        <Association Name="FK__MENU__ID_CLIENTE__276EDEB3">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="MENU">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__MENU__ID_CLIENTE__276EDEB3" Association="Self.FK__MENU__ID_CLIENTE__276EDEB3">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENU" EntitySet="MENU" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MENU" Relationship="Self.FK__MENU__ID_CLIENTE__276EDEB3" FromRole="CLIENTE" ToRole="MENU" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="Int32" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__MENU__ID_CLIENTE__276EDEB3" FromRole="MENU" ToRole="CLIENTE" />
+        </EntityType>
+        <Association Name="FK__MENU__ID_CLIENTE__276EDEB3">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="MENU">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" />
+          <AssociationSet Name="FK__MENU__ID_CLIENTE__276EDEB3" Association="Self.FK__MENU__ID_CLIENTE__276EDEB3">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="MENU" EntitySet="MENU" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="RestauranteModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE1" ColumnName="NOMBRE1" />
+                <ScalarProperty Name="NOMBRE2" ColumnName="NOMBRE2" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENU">
+            <EntityTypeMapping TypeName="RestauranteModel.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

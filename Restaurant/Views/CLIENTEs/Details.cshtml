@@ -1,0 +1,58 @@
+﻿@model Restaurant.Models.CLIENTE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CLIENTE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIRECCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIRECCION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_CLIENTE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
